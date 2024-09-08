@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx src/server.ts",
+    "test-gpt": "tsx src/teste-gpt.ts",
     "test": "tsx src/teste.ts"
   },
   "keywords": [],
@@ -19,7 +20,6 @@
     "ai": "^3.3.26",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
-    "openai": "^4.57.1",
-    "openai-edge": "^1.2.2"
+    "openai": "^4.58.1"
   }
 }
