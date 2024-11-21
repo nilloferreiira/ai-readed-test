@@ -1,5 +1,8 @@
-import OpenAI from "openai"
+// import OpenAI from "openai"
+import fastifyCors from "@fastify/cors"
 import dotenv from "dotenv"
+import fastify from "fastify"
+import { gpt } from "./utils/teste-gpt"
 
 dotenv.config()
 
@@ -31,17 +34,25 @@ dotenv.config()
 
 // getPromptWithAgent()
 
-async function getCompletion() {
-  const openai = new OpenAI({
-    apiKey: process.env.NITE_SECRET_KEY
+const app = fastify()
+
+app.register(fastifyCors, {
+  origin: true
+})
+
+app.get("/", async () => {
+  return "API online!!!"
+})
+
+app.get("/recomendations", async () => {
+  const recomendations = gpt.getRecomendations()
+
+  return recomendations
+})
+
+app
+  .listen({
+    port: process.env.PORT ? Number(process.env.PORT!) : 3333,
+    host: "0.0.0.0"
   })
-
-  const completion = await openai.completions.create({
-    model: "gpt-3.5-turbo-instruct",
-    prompt: "Write a tagline for an ice cream shop."
-  })
-
-  console.log(completion.choices[0].text)
-}
-
-getCompletion()
+  .then(() => console.log("server listening..."))

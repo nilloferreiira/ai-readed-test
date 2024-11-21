@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx src/server.ts",
-    "test-gpt": "tsx src/teste-gpt.ts",
-    "test": "tsx src/teste.ts"
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +15,11 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@fastify/cors": "^10.0.1",
     "ai": "^3.3.26",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
+    "fastify": "^5.1.0",
     "openai": "^4.58.1"
   }
 }
