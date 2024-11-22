@@ -32,7 +32,7 @@ async function getGenAIRecomendations(book: string) {
     }
   })
 
-  const prompt = `Sugira 5 livros relacionados a "${book}" quero o nome dos autores também.`
+  const prompt = `Sugira 6 livros relacionados a "${book}" quero o nome dos autores também.`
 
   const result = await model.generateContent(prompt)
   console.log(result.response.text())

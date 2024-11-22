@@ -1,7 +1,6 @@
 import fastifyCors from "@fastify/cors"
 import dotenv from "dotenv"
 import fastify from "fastify"
-import { gpt } from "./utils/teste-gpt"
 import { genAI } from "./utils/gen-ai"
 
 dotenv.config()
