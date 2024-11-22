@@ -38,13 +38,6 @@ app.get(
   }
 )
 
-// GPT (Não funcional...)
-// app.get("/gpt/recomendations", async () => {
-//   const recomendations = gpt.getRecomendations()
-
-//   return recomendations
-// })
-
 app
   .listen({
     port: process.env.PORT ? Number(process.env.PORT!) : 3333,
