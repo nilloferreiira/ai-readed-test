@@ -1,38 +1,10 @@
-// import OpenAI from "openai"
 import fastifyCors from "@fastify/cors"
 import dotenv from "dotenv"
 import fastify from "fastify"
 import { gpt } from "./utils/teste-gpt"
+import { genAI } from "./utils/gen-ai"
 
 dotenv.config()
-
-// async function getPromptWithAgent() {
-//   const openai = new OpenAI({
-//     apiKey: process.env.NITE_SECRET_KEY
-//   })
-//   const completion = await openai.chat.completions.create({
-//     model: "",
-//     messages: [
-//       {
-//         role: "system",
-//         content: `
-//                 Você é um especialista em livros,
-//                 conhece todos de todos os generos e
-//                 é otimo em recomendar livros novos para todos os leitores.
-//                 Fale na lingaguem que receber no prompt
-//                 `
-//       },
-//       {
-//         role: "user",
-//         content: "Me recomende livros com base em percy jackson"
-//       }
-//     ]
-//   })
-
-//   console.log(completion.choices[0].message)
-// }
-
-// getPromptWithAgent()
 
 const app = fastify()
 
@@ -44,11 +16,35 @@ app.get("/", async () => {
   return "API online!!!"
 })
 
-app.get("/recomendations", async () => {
-  const recomendations = gpt.getRecomendations()
+// GEMINI AI
+app.get(
+  "/gen/recomendations",
+  {
+    schema: {
+      querystring: {
+        type: "object",
+        properties: {
+          book: { type: "string" }
+        },
+        required: ["book"]
+      }
+    }
+  },
+  async (request) => {
+    const { book } = request.query as { book: string }
 
-  return recomendations
-})
+    const recomendations = genAI.getGenAIRecomendations(book)
+
+    return recomendations
+  }
+)
+
+// GPT (Não funcional...)
+// app.get("/gpt/recomendations", async () => {
+//   const recomendations = gpt.getRecomendations()
+
+//   return recomendations
+// })
 
 app
   .listen({
