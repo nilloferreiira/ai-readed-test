@@ -4,7 +4,7 @@ async function getGenAIRecomendations(book: string) {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY!)
 
   const schema = {
-    description: "List of recipes",
+    description: "List of books",
     type: SchemaType.ARRAY,
     items: {
       type: SchemaType.OBJECT,
